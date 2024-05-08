@@ -11,13 +11,12 @@ app.use(cors());
 
 app.post("/api/addSensors", async (req, res) => {
   try {
-    const { id_device, temperature, humidity, light, status_light } = req.body;
+    const { id_device, temperature, humidity, light, status } = req.body;
     const newSensor = new SensorModel({
       id_device,
       temperature,
       humidity,
       light,
-      status_light,
     });
     const savedSensor = await newSensor.save();
     res.status(200).json(savedSensor);

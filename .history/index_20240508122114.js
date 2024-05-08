@@ -17,7 +17,7 @@ app.post("/api/addSensors", async (req, res) => {
       temperature,
       humidity,
       light,
-      status_light,
+      s
     });
     const savedSensor = await newSensor.save();
     res.status(200).json(savedSensor);

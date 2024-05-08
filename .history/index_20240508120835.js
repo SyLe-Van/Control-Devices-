@@ -11,13 +11,12 @@ app.use(cors());
 
 app.post("/api/addSensors", async (req, res) => {
   try {
-    const { id_device, temperature, humidity, light, status_light } = req.body;
+    const { id_device, temperature, humidity, light } = req.body;
     const newSensor = new SensorModel({
       id_device,
       temperature,
       humidity,
       light,
-      status_light,
     });
     const savedSensor = await newSensor.save();
     res.status(200).json(savedSensor);
@@ -82,21 +81,25 @@ app.get("/api/getDeviceById/:id_device", async (req, res) => {
 app.put("/api/updateSensor/:id_device", async (req, res) => {
   try {
     const { id_device } = req.params;
-    const { temperature, humidity, light, status_light } = req.body;
+    const { temperature, humidity, light } = req.body;
 
+    // Find the sensor by id_device
     let sensor = await SensorModel.findOne({ id_device });
 
+    // If sensor doesn't exist, return 404 error
     if (!sensor) {
       return res.status(404).json({ error: "Sensor not found" });
     }
 
+    // Update sensor data
     sensor.temperature = temperature;
     sensor.humidity = humidity;
     sensor.light = light;
-    sensor.status_light = status_light;
 
+    // Save the updated sensor
     const updatedSensor = await sensor.save();
 
+    // Send the updated sensor data as response
     res.status(200).json(updatedSensor);
   } catch (error) {
     console.error("Error updating sensor:", error);
