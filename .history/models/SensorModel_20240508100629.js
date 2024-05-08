@@ -1,9 +1,8 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const SensorSchema = new Schema(
+const SenSchema = new Schema(
   {
-    id_device: String,
     temperature: Number,
     humidity: Number,
     light: Number,
@@ -13,6 +12,6 @@ const SensorSchema = new Schema(
   }
 );
 
-const SensorModel = model("Sensor", SensorSchema);
+const DeviceModel = model("Device", DeviceSchema);
 
-module.exports = SensorModel;
+module.exports = DeviceModel;

@@ -52,7 +52,7 @@ app.get("/api/getAllDevices", async (req, res) => {
 });
 
 // Route to get all sensors
-app.get("/api/getAllSensors", async (req, res) => {
+app.get("/api/getAllsensors", async (req, res) => {
   try {
     const sensors = await SensorModel.find();
     res.status(200).json(sensors);

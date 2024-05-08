@@ -3,10 +3,16 @@ const { Schema, model } = mongoose;
 
 const SensorSchema = new Schema(
   {
-    id_device: String,
-    temperature: Number,
-    humidity: Number,
-    light: Number,
+    name: String,
+    wemos: [{ type: mongoose.Schema.Types.ObjectId, ref: "DeviceModel" }],
+    type: String,
+    data: [
+      {
+        temperature: Number,
+        humidity: Number,
+        light: Number,
+      },
+    ],
   },
   {
     timestamps: true,

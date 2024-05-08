@@ -1,12 +1,13 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const SensorSchema = new Schema(
+const DeviceSchema = new Schema(
   {
-    id_device: String,
-    temperature: Number,
-    humidity: Number,
-    light: Number,
+    device: [{ type: mongoose.Schema.Types.ObjectId, ref: "DeviceModel" }],
+    user: String,
+    name: String,
+    isActive: Boolean,
+    message: String,
   },
   {
     timestamps: true,

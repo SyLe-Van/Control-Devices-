@@ -4,60 +4,60 @@ const app = express();
 const port = 3001;
 const cors = require("cors");
 const mongoose = require("mongoose");
-const DeviceModel = require("./models/DeviceModel");
-const SensorModel = require("./models/SensorModel");
+const DeviceModel = require("./models/SensorModel");
+import SensorModel from "./models/DeviceModel";
+
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/api/addSensors", async (req, res) => {
+app.post("/api/addDevice", async (req, res) => {
   try {
-    const { id_device, temperature, humidity, light } = req.body;
-    const newSensor = new SensorModel({
-      id_device,
+    const { temperature, humidity, light } = req.body;
+    const newDevice = new SensorModel({
       temperature,
       humidity,
       light,
     });
-    const savedSensor = await newSensor.save();
-    res.status(200).json(savedSensor);
-  } catch (error) {
-    console.error("Error creating sensor:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-app.post("/api/addDevices", async (req, res) => {
-  try {
-    const { user, name, isActive, message } = req.body;
-    const newDevice = new DeviceModel({
-      user,
-      name,
-      isActive,
-      message,
-    });
     const savedDevice = await newDevice.save();
-    res.status(200).json(savedDevice);
+    res.status(200).json("Create device successful!");
   } catch (error) {
+    // Handle errors
     console.error("Error creating device:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 app.get("/api/getAllDevices", async (req, res) => {
   try {
     const devices = await DeviceModel.find();
     res.status(200).json(devices);
   } catch (error) {
-    console.error("Error getting devices:", error);
-    res.status(500).json({ error: "Internal server error" });
+    console.error("Error fetching devices:", error);
+    res.status(500).json({ error: "Could not fetch devices" });
   }
 });
-
-// Route to get all sensors
-app.get("/api/getAllSensors", async (req, res) => {
+app.post("/sensors", async (req, res) => {
   try {
-    const sensors = await SensorModel.find();
-    res.status(200).json(sensors);
+    
+    const { device, user, name, isActive, message } = req.body;
+    const deviceExists = await SensorModel.findById(device);
+    if (!deviceExists) {
+      return res.status(404).json({ error: "Device not found" });
+    }
+
+    const newSensor = new SModel({
+      device,
+      user,
+      name,
+      isActive,
+      message,
+    });
+
+    const savedSensor = await newSensor.save();
+    res.status(201).json(savedSensor);
   } catch (error) {
-    console.error("Error getting sensors:", error);
+    
+    console.error("Error creating sensor:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });

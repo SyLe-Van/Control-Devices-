@@ -3,7 +3,6 @@ const { Schema, model } = mongoose;
 
 const SensorSchema = new Schema(
   {
-    id_device: String,
     temperature: Number,
     humidity: Number,
     light: Number,

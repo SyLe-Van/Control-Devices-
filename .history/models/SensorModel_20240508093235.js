@@ -3,10 +3,11 @@ const { Schema, model } = mongoose;
 
 const SensorSchema = new Schema(
   {
-    id_device: String,
-    temperature: Number,
-    humidity: Number,
-    light: Number,
+    : [{ type: mongoose.Schema.Types.ObjectId, ref: "DeviceModel" }],
+    user: String,
+    name: String,
+    isActive: Boolean,
+    message: String,
   },
   {
     timestamps: true,

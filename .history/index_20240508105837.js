@@ -41,7 +41,7 @@ app.post("/api/addDevices", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-app.get("/api/getAllDevices", async (req, res) => {
+app.get("/api/devices", async (req, res) => {
   try {
     const devices = await DeviceModel.find();
     res.status(200).json(devices);
@@ -52,7 +52,7 @@ app.get("/api/getAllDevices", async (req, res) => {
 });
 
 // Route to get all sensors
-app.get("/api/getAllSensors", async (req, res) => {
+app.get("/api/sensors", async (req, res) => {
   try {
     const sensors = await SensorModel.find();
     res.status(200).json(sensors);
