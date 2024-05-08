@@ -61,23 +61,7 @@ app.get("/api/getAllSensors", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
-//get device (id)
-app.get("/api/getDeviceById/:id_device", async (req, res) => {
-  try {
-    const { id_device } = req.params;
-    const device = await SensorModel.findOne({ id_device });
-
-    if (!device) {
-      return res.status(404).json({ error: "Device not found" });
-    }
-
-    res.status(200).json(device);
-  } catch (error) {
-    console.error("Error getting device by id:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
+//
 mongoose
   .connect(
     "mongodb+srv://sycung9001:07122002@device.bsoktry.mongodb.net/?retryWrites=true&w=majority&appName=Device",

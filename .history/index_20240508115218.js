@@ -65,7 +65,7 @@ app.get("/api/getAllSensors", async (req, res) => {
 app.get("/api/getDeviceById/:id_device", async (req, res) => {
   try {
     const { id_device } = req.params;
-    const device = await SensorModel.findOne({ id_device });
+    const device = await DeviceModel.findOne({ id_device });
 
     if (!device) {
       return res.status(404).json({ error: "Device not found" });
