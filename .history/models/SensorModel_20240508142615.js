@@ -7,7 +7,7 @@ const SensorSchema = new Schema(
     temperature: String,
     humidity: String,
     light: String,
-    status_light: String,
+    status_light: Number,
   },
   {
     timestamps: true,
